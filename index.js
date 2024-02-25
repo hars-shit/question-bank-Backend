@@ -5,10 +5,11 @@ const paper=require('./routes/paper')
 const login=require('./routes/login')
 dotenv.config()
 const app=express();
-
+const cors = require('cors');
 // db connection 
 
 connect()
+app.use(cors())
 app.use(express.json())
 app.use('/api',paper)
 app.use('/api',login)
