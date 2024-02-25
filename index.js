@@ -1,0 +1,20 @@
+const express=require('express');
+const connect = require('./database/db');
+const dotenv=require('dotenv')
+const paper=require('./routes/paper')
+const login=require('./routes/login')
+dotenv.config()
+const app=express();
+
+// db connection 
+
+connect()
+app.use(express.json())
+app.use('/api',paper)
+app.use('/api',login)
+
+
+
+app.listen(3000,()=>{
+    console.log("Server is listening ",3000)
+})
