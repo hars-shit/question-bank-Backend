@@ -22,8 +22,8 @@ const PapersSchema=new mongoose.Schema({
         required:true,
     },
     is_accepted:{
-        type:Number,
-        required:true,
+        type:Boolean,
+        default:false,
     }
 },
 {

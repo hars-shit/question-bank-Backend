@@ -22,17 +22,38 @@ router.get('/all', async (req, res) => {
 });
 
 // delete by id 
-router.delete('/delete/:id',async(req,res)=>{
-    try{
-        const pdf=await paper.findById(req.params.id);
-        if(!pdf){
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const pdf = await paper.findById(req.params.id);
+        if (!pdf) {
             res.status(404).json(err);
         }
         await paper.deleteOne();
         res.status(200).json('Deleted Successfully')
     }
-    catch(err){
+    catch (err) {
         res.status(500).json("Internal Server Error")
+    }
+})
+
+//   update api status  
+
+router.put('/update/:id', async (req, res) => {
+    try {
+        const pdf = await paper.findById(req.params.id);
+        if (!pdf) {
+            res.status(404).json("Paper not Found");
+        }
+        const updatePdf = await paper.findByIdAndUpdate(
+            req.params.id,
+            {is_accepted:true},
+            {new : true}
+        );
+        res.status(200).json(updatePdf);
+
+    }
+    catch (error) {
+        res.status(500).json("Internal Server Error");
     }
 })
 
